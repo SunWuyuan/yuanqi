@@ -1,0 +1,374 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Sen";
+}
+* {
+  box-sizing: border-box;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+#main {
+  display: flex;
+}
+#main .part {
+  flex: 1;
+}
+#main .part .section {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+#main .part .section img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  position: absolute;
+  left: var(--x);
+  pointer-events: none;
+}
+.cursor {
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  z-index: 999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+}
+.cursor-f {
+  width: var(--size);
+  height: var(--size);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='47' height='47' viewBox='0 0 47 47' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M42.4202 42.4202C38.8403 46 33.3594 46 23.5 46C13.6406 46 8.15966 46 4.57983 42.4202C1 38.8403 1 33.3594 1 23.5C1 13.6406 1 8.15966 4.57983 4.57983C8.15966 1 13.6406 1 23.5 1C33.3594 1 38.8403 1 42.4202 4.57983C46 8.15966 46 13.6406 46 23.5C46 33.3594 46 38.8403 42.4202 42.4202Z' stroke='white'/%3E%3C/svg%3E%0A");
+  background-size: cover;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.buttons {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99;
+}
+.buttons button {
+  border: none;
+  background-size: contain;
+  background: url("data:image/svg+xml,%3Csvg width='10' height='29' viewBox='0 0 10 29' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M9 0V27L1 17.4857' stroke='white' stroke-width='2' /%3E%3C/svg%3E%0A") no-repeat;
+  background-position: center;
+  width: 10px;
+  height: 30px;
+  display: block;
+  margin: 20px 0;
+  padding: 0 15px;
+  transition-duration: 0.6s;
+}
+.buttons button.next {
+  transform: scaleY(-1);
+}
+.buttons button.prev:active {
+  transform: translateY(8px);
+}
+.buttons button.next:active {
+  transform: scaleY(-1) translateY(8px);
+}
+h1 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 99;
+  color: white;
+  text-align: center;
+  font-size: 2.6em;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.content {
+  width: 90%;
+  position: absolute;
+  bottom: 20px;
+  text-align: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+  color: white;
+  z-index: 99;
+  font-size: 0.8em;
+}
+.content p {
+  margin: 0.5em auto;
+}
+.content kbd {
+  width: 15px;
+  height: 15px;
+  border: 1px solid white;
+  display: inline-block;
+  border-radius: 3px;
+  font-size: 0.9em;
+  vertical-align: text-top;
+}
+.content a {
+  color: rgba(227, 227, 227, 0.78);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.content a:hover {
+  padding-bottom: 1px;
+}
+
+.container {
+  text-align: center;
+  color: #2c3e50;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  transition: all 0.5s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.finder {
+  border: 1px solid #fff;
+  background-color: #f6f5f0;
+  border-radius: 15px;
+  padding: 8px;
+  box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+}
+
+.finder__outer {
+  display: flex;
+  width: 600px;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: inset 10px 10px 15px -10px #c3c3c3, inset -10px -10px 15px -10px #ffffff;
+}
+
+.finder__inner {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.finder__form {
+  flex: 1;
+  height: calc(100% + 3rem);
+}
+
+.finder__input {
+  height: calc(100% + 3rem);
+  border: none;
+  background-color: transparent;
+  outline: none;
+  font-size: 1.5rem;
+  letter-spacing: 0.75px;
+}
+
+.finder__icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 1rem;
+  transition: all 0.2s;
+  box-shadow: inset 0 0 0 20px #292929;
+  border-radius: 50%;
+  position: relative;
+}
+.finder__icon:after, .finder__icon:before {
+  display: block;
+  content: "";
+  position: absolute;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.finder__icon:after {
+  width: 10px;
+  height: 10px;
+  background-color: #292929;
+  border: 3px solid #f6f5f0;
+  top: 50%;
+  position: absolute;
+  transform: translateY(-50%);
+  left: 0px;
+  right: 0;
+  margin: auto;
+  border-radius: 50%;
+}
+.active .finder__icon:after {
+  border-width: 10px;
+  background-color: #f6f5f0;
+}
+
+.finder__icon:before {
+  width: 4px;
+  height: 13px;
+  background-color: #f6f5f0;
+  top: 50%;
+  left: 20px;
+  transform: rotateZ(45deg) translate(-50%, 0);
+  transform-origin: 0 0;
+  border-radius: 4px;
+}
+.active .finder__icon:before {
+  background-color: #292929;
+  width: 6px;
+  transform: rotateZ(45deg) translate(-50%, 25px);
+}
+
+.processing .finder__icon {
+  transform-origin: 50%;
+  animation: spinner 0.3s linear infinite;
+  animation-delay: 0.5s;
+}
+
+.active .finder__icon {
+  transform: translateY(-5px);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotateZ(45deg);
+  }
+  100% {
+    transform: rotateZ(405deg);
+  }
+}
+
+
+
+
+#weather-view-he {
+  height: 285px !important;
+  padding: 10px !important;
+  border-radius: 10px !important;
+  background-color: var(--bg-w-pure) !important;
+  box-shadow: rgba(0, 0, 0, .1) 0 0 20px
+
+}
+
+
+.wv-lt-location,
+.wv-lt-refresh {
+  display: inline-block
+}
+
+.wv-lt-location a {
+  padding: 0 5px;
+  border-radius: 3px;
+  color: var(--theme-color) !important;
+  background-color: var(--theme-color-tint);
+  text-decoration: none !important
+  
+}
+
+.wv-lt-col-5 {
+  text-align: right
+}
+
+.wv-lt-refresh a {
+  font-size: 0 !important
+}
+
+.wv-lt-refresh a::after {
+  content: "和风天气";
+  font-size: small !important
+}
+
+.vw-f-cell a,
+.wv-n-h-now-rain-text,
+.wv-n-h-now-tmp span,
+.wv-n-h-now-txt span,
+.wv-n-h-now-txt-t {
+  color: var(--txt-b-pure) !important
+}
+
+.wv-f-table div .vw-f-cell:nth-child(1) a {
+  color: #9b9b9b !important
+}
+
+.wv-top-backdrop {
+  height: 285px !important;
+  padding-top: 50px !important
+}
+
+.wv-top-backdrop::after {
+  content: "请选择" !important;
+  padding-left: 5%
+}
+
+.wv-top-button,
+.wv-top-select {
+  height: 36px !important;
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer;
+  transition: .25s
+}
+
+.wv-top-select {
+  padding-left: 10px !important
+}
+
+.wv-top-button {
+  background-color: var(--theme-color) !important;
+  color: #fff !important 
+  --fonts-light:"Microsoft Yahei Light", "Microsoft Yahei", "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  --fonts-regular: "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC", "Microsoft Yahei", sans-serif;
+  --cubic-bezier: cubic-bezier(0.65, 0.05, 0.1, 1);
+  --body-top: 0px;
+  color-scheme: dark;
+  --w-alpha-60: rgba(30, 30, 30, .6);
+  --theme-color: #5CA1FF;
+  --theme-color-hover: #5390E6;
+  --theme-color-active: #4578BF;
+  --theme-color-tint: rgba(92, 161, 255, 0.1);
+  --selection-color: rgba(92, 161, 255, 0.35);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  pointer-events: unset;
+  -webkit-font-smoothing: antialiased;
+  touch-action: pan-y;
+  height: 36px !important;
+  border: none !important;
+  border-radius: 5px !important;
+  cursor: pointer;
+  transition: .25s;
+  background-color: var(--theme-color) !important;
+  color: #fff !important;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-size: 1.2em;
+  width: 90%;
+  box-shadow: none;
+  text-align: center;
+
+}
+
+.wv-top-button:hover {
+  background-color: var(--theme-color-hover) !important
+}
+
+.wv-top-button:active {
+  background-color: var(--theme-color-active) !important
+}

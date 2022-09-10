@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <meta charset="UTF-8">
+  <title>起始页</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Sen&amp;display=swap'>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+</head>
+
+<body>    
+  <!-- partial:index.partial.html -->
+  <div id="main">
+
+
+
+  </div><div id="he-plugin-simple"></div>
+  <script>
+      WIDGET = {
+          "CONFIG": {
+              "modules": "0123",
+              "background": "5",
+              "tmpColor": "FFFFFF",
+              "tmpSize": "16",
+              "cityColor": "FFFFFF",
+              "citySize": "16",
+              "aqiColor": "FFFFFF",
+              "aqiSize": "16",
+              "weatherIconSize": "24",
+              "alertIconSize": "18",
+              "padding": "10px 10px 10px 10px",
+              "shadow": "0",
+              "language": "auto",
+              "fixed": "true",
+              "vertical": "top",
+              "horizontal": "left",
+              "left": "10",
+              "bottom": "10",
+              "key": "f64252572dc24440b3f8800b008edf96"
+          }
+      }
+  </script>
+  <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+
+
+  <div class="container">
+    <form autocomplete="off">
+      <div class="finder">
+        <div class="finder__outer">
+          <div class="finder__inner">
+            <div class="finder__icon" ref="icon"></div>
+            <input class="finder__input" type="text" id="searchInput" name="q" onkeydown="enter()"
+              placeholder="回车<(￣︶￣)↗[GO!]" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js'></script>
+  <script src="./script.js"></script>
+
+</body>
+
+</html>
+<script>
+  const input = document.querySelector(".finder__input");
+  const finder = document.querySelector(".finder");
+  const form = document.querySelector("form");
+
+  input.addEventListener("focus", () => {
+    finder.classList.add("active");
+  });
+
+  input.addEventListener("blur", () => {
+    if (input.value.length === 0) {
+      finder.classList.remove("active");
+    }
+  });
+
+  form.addEventListener("submit", (ev) => {
+    ev.preventDefault();
+    finder.classList.add("processing");
+    finder.classList.remove("active");
+    input.disabled = true;
+    setTimeout(() => {
+      finder.classList.remove("processing");
+      input.disabled = false;
+      if (input.value.length > 0) {
+        finder.classList.add("active");
+      }
+    }, 1000);
+  });
+</script>
+<script>
+  function enter() {
+    var event = window.event || arguments.callee.caller.arguments[0];
+    if (event.keyCode == 13) {
+      var searchValue = document.getElementById("searchInput").value;
+      // alert(searchValue);
+      window.location.href = "https://www.baidu.com/s?ie=utf-8&word=" + searchValue;
+    }
+  }
+  function click() {
+    var searchValue = document.getElementById("searchInput").value;
+    // alert(searchValue);
+    window.location.href = "https://www.baidu.com/s?ie=utf-8&word=" + searchValue;
+  }
+  //标题栏变化
+  var OriginTitile = document.title;
+  var st;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦";
+      clearTimeout(st);
+      console.log('hide');
+    } else {
+      document.title = '(*´∇｀*) 被你发现啦~ ' + OriginTitile;
+      console.log('show');
+      st = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 4000);
+      console.log('endChange=');
+    }
+  });
+
+  "use strict";
+  function clock() {
+    let hours = document.getElementById("hour");
+    let minutes = document.getElementById("minutes");
+    let seconds = document.getElementById("seconds");
+    let ampm = document.getElementById("ampm");
+    let h = new Date().getHours();
+    let m = new Date().getMinutes();
+    let s = new Date().getSeconds();
+    let am = 'AM';
+    // convert military time to standard w AM / PM indicator
+    if (h > 12) {
+      h = h - 12;
+      am = 'PM';
+    }
+    hours.innerHTML = h;
+    minutes.innerHTML = m;
+    seconds.innerHTML = s;
+    ampm.innerHTML = am;
+  }
+  let interval = setInterval(clock, 1000);
+</script>
