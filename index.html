@@ -9,37 +9,38 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 </head>
 
-<body>    
+<body>
   <!-- partial:index.partial.html -->
   <div id="main">
 
 
 
-  </div><div id="he-plugin-simple"></div>
+  </div>
+  <div id="he-plugin-simple"></div>
   <script>
-      WIDGET = {
-          "CONFIG": {
-              "modules": "0123",
-              "background": "5",
-              "tmpColor": "FFFFFF",
-              "tmpSize": "16",
-              "cityColor": "FFFFFF",
-              "citySize": "16",
-              "aqiColor": "FFFFFF",
-              "aqiSize": "16",
-              "weatherIconSize": "24",
-              "alertIconSize": "18",
-              "padding": "10px 10px 10px 10px",
-              "shadow": "0",
-              "language": "auto",
-              "fixed": "true",
-              "vertical": "top",
-              "horizontal": "left",
-              "left": "10",
-              "bottom": "10",
-              "key": "f64252572dc24440b3f8800b008edf96"
-          }
+    WIDGET = {
+      "CONFIG": {
+        "modules": "0123",
+        "background": "5",
+        "tmpColor": "FFFFFF",
+        "tmpSize": "16",
+        "cityColor": "FFFFFF",
+        "citySize": "16",
+        "aqiColor": "FFFFFF",
+        "aqiSize": "16",
+        "weatherIconSize": "24",
+        "alertIconSize": "18",
+        "padding": "10px 10px 10px 10px",
+        "shadow": "0",
+        "language": "auto",
+        "fixed": "true",
+        "vertical": "top",
+        "horizontal": "left",
+        "left": "10",
+        "bottom": "10",
+        "key": "f64252572dc24440b3f8800b008edf96"
       }
+    }
   </script>
   <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
 
@@ -125,25 +126,5 @@
     }
   });
 
-  "use strict";
-  function clock() {
-    let hours = document.getElementById("hour");
-    let minutes = document.getElementById("minutes");
-    let seconds = document.getElementById("seconds");
-    let ampm = document.getElementById("ampm");
-    let h = new Date().getHours();
-    let m = new Date().getMinutes();
-    let s = new Date().getSeconds();
-    let am = 'AM';
-    // convert military time to standard w AM / PM indicator
-    if (h > 12) {
-      h = h - 12;
-      am = 'PM';
-    }
-    hours.innerHTML = h;
-    minutes.innerHTML = m;
-    seconds.innerHTML = s;
-    ampm.innerHTML = am;
-  }
-  let interval = setInterval(clock, 1000);
+ 
 </script>

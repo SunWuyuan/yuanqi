@@ -1,6 +1,6 @@
 // sorry for the spaghetti code and redundant variables, i wasn't exactly a good coder back then
 
-const cols = 3;
+const cols = 1;
 const main = document.getElementById('main');
 let parts = [];
 
@@ -9,9 +9,9 @@ let images = [
 ];
 let current = 0;
 let playing = false;
-
+//img
 for (let i in images) {
-  new Image().src = images[i];
+  new Image().src = images;
 }
 
 for (let col = 0; col < cols; col++) {
@@ -73,7 +73,7 @@ function go(dir) {
     }
   }
 }
-
+//img over
 window.addEventListener('keydown', function(e) {
   if (['ArrowDown', 'ArrowRight'].includes(e.key)) {
     go(1);

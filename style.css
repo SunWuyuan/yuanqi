@@ -177,6 +177,7 @@ form {
 }
 
 .finder__input {
+  width: 90%;
   height: calc(100% + 3rem);
   border: none;
   background-color: transparent;
