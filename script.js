@@ -1,12 +1,10 @@
 // sorry for the spaghetti code and redundant variables, i wasn't exactly a good coder back then
 
-const cols = 1;
-const main = document.getElementById('main');
+const cols = 10;
+const main = document.getElementById("main");
 let parts = [];
 
-let images = [
-  "https://www.retiehe.com/backend/bing/1080p"
-];
+let images = ["https://www.retiehe.com/backend/bing/1080p"];
 let current = 0;
 let playing = false;
 //img
@@ -15,14 +13,14 @@ for (let i in images) {
 }
 
 for (let col = 0; col < cols; col++) {
-  let part = document.createElement('div');
-  part.className = 'part';
-  let el = document.createElement('div');
+  let part = document.createElement("div");
+  part.className = "part";
+  let el = document.createElement("div");
   el.className = "section";
-  let img = document.createElement('img');
+  let img = document.createElement("img");
   img.src = images[current];
   el.appendChild(img);
-  part.style.setProperty('--x', -100/cols*col+'vw');
+  part.style.setProperty("--x", (-100 / cols) * col + "vw");
   part.appendChild(el);
   main.appendChild(part);
   parts.push(part);
@@ -30,7 +28,7 @@ for (let col = 0; col < cols; col++) {
 
 let animOptions = {
   duration: 2.3,
-  ease: Power4.easeInOut
+  ease: Power4.easeInOut,
 };
 
 function go(dir) {
@@ -42,88 +40,111 @@ function go(dir) {
 
     function up(part, next) {
       part.appendChild(next);
-      gsap.to(part, {...animOptions, y: -window.innerHeight}).then(function () {
-        part.children[0].remove();
-        gsap.to(part, {duration: 0, y: 0});
-      })
+      gsap
+        .to(part, { ...animOptions, y: -window.innerHeight })
+        .then(function () {
+          part.children[0].remove();
+          gsap.to(part, { duration: 0, y: 0 });
+        });
     }
 
     function down(part, next) {
       part.prepend(next);
-      gsap.to(part, {duration: 0, y: -window.innerHeight});
-      gsap.to(part, {...animOptions, y: 0}).then(function () {
+      gsap.to(part, { duration: 0, y: -window.innerHeight });
+      gsap.to(part, { ...animOptions, y: 0 }).then(function () {
         part.children[1].remove();
         playing = false;
-      })
+      });
     }
-
-    for (let p in parts) {
-      let part = parts[p];
-      let next = document.createElement('div');
-      next.className = 'section';
-      let img = document.createElement('img');
-      img.src = images[current];
-      next.appendChild(img);
-
-      if ((p - Math.max(0, dir)) % 2) {
-        down(part, next);
+    //判断手机端或电脑端
+    function mobilePcRedirect() {
+      var sUserAgent= navigator.userAgent.toLowerCase();
+      var bIsIpad= sUserAgent.match(/ipad/i) == "ipad";
+      var bIsIphoneOs= sUserAgent.match(/iphone os/i) == "iphone os";
+      var bIsMidp= sUserAgent.match(/midp/i) == "midp";
+      var bIsUc7= sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+      var bIsUc= sUserAgent.match(/ucweb/i) == "ucweb";
+      var bIsAndroid= sUserAgent.match(/android/i) == "android";
+      var bIsCE= sUserAgent.match(/windows ce/i) == "windows ce";
+      var bIsWM= sUserAgent.match(/windows mobile/i) == "windows mobile";
+      if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+      //手机端无需执行，输出内容测试
+        console.log('手机端');
       } else {
-        up(part, next);
+        //电脑端：背景特效
+        for (let p in parts) {
+          let part = parts[p];
+          let next = document.createElement("div");
+          next.className = "section";
+          let img = document.createElement("img");
+          img.src = images[current];
+          next.appendChild(img);
+    
+          if ((p - Math.max(0, dir)) % 2) {
+            down(part, next);
+          } else {
+            up(part, next);
+          }
+        }
+        window.addEventListener("keydown", function (e) {
+          if (["ArrowDown", "ArrowRight"].includes(e.key)) {
+            go(1);
+          } else if (["ArrowUp", "ArrowLeft"].includes(e.key)) {
+            go(-1);
+          }
+        });
+    
       }
-    }
+      };
+      
+      mobilePcRedirect();
+      
+    //emmm
+   
+    //emmm
   }
 }
-//img over
-window.addEventListener('keydown', function(e) {
-  if (['ArrowDown', 'ArrowRight'].includes(e.key)) {
-    go(1);
-  }
-
-  else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) {
-    go(-1);
-  }
-});
 
 function lerp(start, end, amount) {
-  return (1-amount)*start+amount*end
+  return (1 - amount) * start + amount * end;
 }
+//img over
+const cursor = document.createElement("div");
+cursor.className = "cursor";
 
-const cursor = document.createElement('div');
-cursor.className = 'cursor';
-
-const cursorF = document.createElement('div');
-cursorF.className = 'cursor-f';
+const cursorF = document.createElement("div");
+cursorF.className = "cursor-f";
 let cursorX = 0;
 let cursorY = 0;
 let pageX = 0;
 let pageY = 0;
 let size = 8;
 let sizeF = 36;
-let followSpeed = .16;
+let followSpeed = 0.16;
 
 document.body.appendChild(cursor);
 document.body.appendChild(cursorF);
 
-if ('ontouchstart' in window) {
-  cursor.style.display = 'none';
-  cursorF.style.display = 'none';
+if ("ontouchstart" in window) {
+  cursor.style.display = "none";
+  cursorF.style.display = "none";
 }
 
-cursor.style.setProperty('--size', size+'px');
-cursorF.style.setProperty('--size', sizeF+'px');
+cursor.style.setProperty("--size", size + "px");
+cursorF.style.setProperty("--size", sizeF + "px");
 
-window.addEventListener('mousemove', function(e) {
+window.addEventListener("mousemove", function (e) {
   pageX = e.clientX;
   pageY = e.clientY;
-  cursor.style.left = e.clientX-size/2+'px';
-  cursor.style.top = e.clientY-size/2+'px';
+  cursor.style.left = e.clientX - size / 2 + "px";
+  cursor.style.top = e.clientY - size / 2 + "px";
 });
 
 function loop() {
   cursorX = lerp(cursorX, pageX, followSpeed);
   cursorY = lerp(cursorY, pageY, followSpeed);
-  cursorF.style.top = cursorY - sizeF/2 + 'px';
-  cursorF.style.left = cursorX - sizeF/2 + 'px';
+  cursorF.style.top = cursorY - sizeF / 2 + "px";
+  cursorF.style.left = cursorX - sizeF / 2 + "px";
   requestAnimationFrame(loop);
 }
 
@@ -134,46 +155,48 @@ let endY;
 let clicked = false;
 
 function mousedown(e) {
-  gsap.to(cursor, {scale: 4.5});
-  gsap.to(cursorF, {scale: .4});
+  gsap.to(cursor, { scale: 4.5 });
+  gsap.to(cursorF, { scale: 0.4 });
 
   clicked = true;
   startY = e.clientY || e.touches[0].clientY || e.targetTouches[0].clientY;
 }
 function mouseup(e) {
-  gsap.to(cursor, {scale: 1});
-  gsap.to(cursorF, {scale: 1});
+  gsap.to(cursor, { scale: 1 });
+  gsap.to(cursorF, { scale: 1 });
 
   endY = e.clientY || endY;
   if (clicked && startY && Math.abs(startY - endY) >= 40) {
-    go(!Math.min(0, startY - endY)?1:-1);
+    go(!Math.min(0, startY - endY) ? 1 : -1);
     clicked = false;
     startY = null;
     endY = null;
   }
 }
-window.addEventListener('mousedown', mousedown, false);
-window.addEventListener('touchstart', mousedown, false);
-window.addEventListener('touchmove', function(e) {
-  if (clicked) {
-    endY = e.touches[0].clientY || e.targetTouches[0].clientY;
-  }
-}, false);
-window.addEventListener('touchend', mouseup, false);
-window.addEventListener('mouseup', mouseup, false);
+window.addEventListener("mousedown", mousedown, false);
+window.addEventListener("touchstart", mousedown, false);
+window.addEventListener(
+  "touchmove",
+  function (e) {
+    if (clicked) {
+      endY = e.touches[0].clientY || e.targetTouches[0].clientY;
+    }
+  },
+  false
+);
+window.addEventListener("touchend", mouseup, false);
+window.addEventListener("mouseup", mouseup, false);
 
 let scrollTimeout;
 function wheel(e) {
   clearTimeout(scrollTimeout);
-  setTimeout(function() {
+  setTimeout(function () {
     if (e.deltaY < -40) {
       go(-1);
-    }
-    else if (e.deltaY >= 40) {
+    } else if (e.deltaY >= 40) {
       go(1);
     }
-  })
+  });
 }
-window.addEventListener('mousewheel', wheel, false);
-window.addEventListener('wheel', wheel, false);
-
+window.addEventListener("mousewheel", wheel, false);
+window.addEventListener("wheel", wheel, false);
