@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Sen&amp;display=swap'>
 
 <head>
-  <meta charset="UTF-8">
-  <title>起始页</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Sen&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <title>元启</title>
 </head>
+<div id="main">
+</div>
 
-<body>
-  <!-- partial:index.partial.html -->
-  <div id="main">
-
-
-
+<body oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
+  <div id="content">
+    <div class="search_part">
+      <div class="container">
+        <form autocomplete="off">
+          <div class="finder" id="finderID">
+            <div class="finder__outer">
+              <div class="finder__inner">
+                <div class="finder__icon" ref="icon"></div>
+                <form id="search_form" class="search_bar">
+                  <span style="width: 90%;"><i id="clear" onclick="clear_seach()"></i>
+                    <div class="si"><input class="finder__input" type="text" value="" onkeyup="get_suggest()"
+                        onfocus="get_suggest()" onpaste="get_suggest()" autocomplete="off" id="search_input"
+                        placeholder="回车<(￣︶￣)↗[GO!]😏"> </div>
+                  </span>
+                </form>
+              </div>
+            </div>
+            <div id="suggest" style="display:none">
+              <ul class="sugList" id="sugList"></ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
   <div id="he-plugin-simple"></div>
   <script>
@@ -44,27 +64,119 @@
   </script>
   <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
 
-
-  <div class="container">
-    <form autocomplete="off">
-      <div class="finder">
-        <div class="finder__outer">
-          <div class="finder__inner">
-            <div class="finder__icon" ref="icon"></div>
-            <input class="finder__input" type="text" id="searchInput" name="q" onkeydown="enter()"
-              placeholder="回车<(￣︶￣)↗[GO!]" />
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-  <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js'></script>
-  <script src="./script.js"></script>
-
 </body>
 
 </html>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js'></script>
+<script src='./script.js'></script>
+<script type="text/javascript">
+  document.onkeydown = function (e) {
+    if (e.keyCode == 13) {
+      var searchValue = document.getElementById("search_input").value;
+      window.location.href = "https://www.baidu.com/s?wd=" + searchValue + "&from=smor&safe=1&snum=1";
+    }
+  }
+</script>
+<script type="text/javascript">
+  var last_kw = '';
+  var max_sug_len = 1;
+  async function get_suggest() {
+    var suggest = document.getElementById('finder');
+    var kw = document.getElementById('search_input').value;
+    var clear = document.getElementById('clear');
+    if (kw) clear.style.display = 'block';
+    else clear.style.display = 'none';
+    if (kw == last_kw) return;
+    last_kw = kw;
+    if (!kw || kw.length < max_sug_len) {
+      document.getElementById("finderID").style.height = "106px";
+      close_sug();
+      return;
+    }
+    document.getElementById("finderID").style.height = "368px";
+    await sleep(300);
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://sugs.m.sm.cn/web?t=w&uc_param_str=dnnwnt&scheme=http&fr=android&bid=1&q=' + encodeURIComponent(kw) + '&_=' + new Date().getTime() + '&callback=jsonp3';
+    var head = document.querySelector('head');
+    script.onload = function () {
+      head.removeChild(script);
+    };
+    head.appendChild(script);
+  }
+  function sleep(time) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, time);
+    });
+  }
+  function jsonp3(res) {
+    var suggest = document.getElementById('suggest');
+    if (!res.r || !res.r.length) {
+      suggest.style.display = 'none';
+      return;
+    }
+    var html = '';
+    res.r.forEach(function (v) {
+      html += '<li>' + v.w + '<b></b></li>';
+    });
+    document.getElementById('sugList').innerHTML = html;
+    suggest.style.display = 'block';
+  }
+  function close_sug() {
+    last_kw = '';
+    document.getElementById('suggest').style.display = 'none';
+  }
+  function move_input() {
+    document.body.scrollTop = document.getElementById('search_form').offsetTop - 2;
+  }
+  function clear_seach() {
+    var input = document.getElementById('search_input');
+    input.value = '';
+    document.getElementById('clear').style.display = 'none';
+    close_sug();
+    input.focus();
+  }
+  function search() {
+    if (document.getElementById("search_input").value != "") {
+      window.location.href = "https://www.baidu.com/s?wd=" + encodeURIComponent(document.getElementById("search_input").value) + "&from=smor&safe=1&snum=1";
+      document.getElementById("search_input").value = "";
+    } return false;
+  }
+  document.getElementById('sugList').addEventListener('click', function (e) {
+    var input = document.getElementById('search_input');
+    if (e.target.tagName == 'B') {
+      input.value = e.target.parentNode.firstChild.textContent;
+      input.focus();
+    } else if (e.target.tagName == 'LI') {
+      input.value = e.target.firstChild.textContent;
+      close_sug();
+      search();
+    }
+  });
+  window.addEventListener('resize', move_input);
+</script>
+
+<script>
+  //标题栏变化
+  var OriginTitile = document.title;
+  var st;
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我藏好了哦";
+      clearTimeout(st);
+      console.log('hide');
+    } else {
+      document.title = '(*´∇｀*) 被你发现啦~ ' + OriginTitile;
+      console.log('show');
+      st = setTimeout(function () {
+        document.title = OriginTitile;
+      }, 4000);
+      console.log('endChange=');
+    }
+  });
+</script>
 <script>
   const input = document.querySelector(".finder__input");
   const finder = document.querySelector(".finder");
@@ -94,37 +206,4 @@
     }, 1000);
   });
 </script>
-<script>
-  function enter() {
-    var event = window.event || arguments.callee.caller.arguments[0];
-    if (event.keyCode == 13) {
-      var searchValue = document.getElementById("searchInput").value;
-      // alert(searchValue);
-      window.location.href = "https://www.baidu.com/s?ie=utf-8&word=" + searchValue;
-    }
-  }
-  function click() {
-    var searchValue = document.getElementById("searchInput").value;
-    // alert(searchValue);
-    window.location.href = "https://www.baidu.com/s?ie=utf-8&word=" + searchValue;
-  }
-  //标题栏变化
-  var OriginTitile = document.title;
-  var st;
-  document.addEventListener('visibilitychange', function () {
-    if (document.hidden) {
-      document.title = "(つェ⊂)我藏好了哦";
-      clearTimeout(st);
-      console.log('hide');
-    } else {
-      document.title = '(*´∇｀*) 被你发现啦~ ' + OriginTitile;
-      console.log('show');
-      st = setTimeout(function () {
-        document.title = OriginTitile;
-      }, 4000);
-      console.log('endChange=');
-    }
-  });
-
- 
-</script>
+<!--孙悟元-知识创造一切，wuyuan.dev-->
