@@ -415,3 +415,12 @@ form {
   background-color: var(--theme-color-active) !important
 }
 
+#weather-view-he[data-v-db6ccf64]{
+
+  background-color: var(--back-color);
+  padding: 40px;  
+  box-shadow: 0px 0px 15px rgba(55, 84, 170, .15),
+              0px 0px 20px rgba(255, 255, 255, 1),
+              0px 0px 4px rgba(255, 255, 255, .2) !important;
+  border-radius: 30px;
+}
