@@ -189,11 +189,11 @@ form {
 .finder {
   height: 106px;
   transition: all 0.3s;
-  border: 1px solid #fff;
-  background-color: #f6f5f0;
+  border: 1px solid #f2f2f2;
+  background-color: #f2f2f2;
   border-radius: 15px;
   padding: 8px;
-  box-shadow: 9px 9px 16px rgba(189, 189, 189, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+  box-shadow: 5px 5px 16px #cecece, -5px -5px 16px #ffffff;
 }
 
 
@@ -202,7 +202,7 @@ form {
   width: 600px;
   padding: 1.5rem 2rem;
   border-radius: 10px;
-  box-shadow: inset 10px 10px 15px -10px #c3c3c3, inset -10px -10px 15px -10px #ffffff;
+  box-shadow: inset 10px 10px 15px -10px #cecece, inset -10px -10px 15px -10px #ffffff;
 }
 
 .finder__inner {
@@ -373,38 +373,6 @@ form {
 .wv-top-button {
   background-color: var(--theme-color) !important;
   color: #fff !important 
-  --fonts-light:"Microsoft Yahei Light", "Microsoft Yahei", "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
-  --fonts-regular: "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC", "Microsoft Yahei", sans-serif;
-  --cubic-bezier: cubic-bezier(0.65, 0.05, 0.1, 1);
-  --body-top: 0px;
-  color-scheme: dark;
-  --w-alpha-60: rgba(30, 30, 30, .6);
-  --theme-color: #5CA1FF;
-  --theme-color-hover: #5390E6;
-  --theme-color-active: #4578BF;
-  --theme-color-tint: rgba(92, 161, 255, 0.1);
-  --selection-color: rgba(92, 161, 255, 0.35);
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
-  pointer-events: unset;
-  -webkit-font-smoothing: antialiased;
-  touch-action: pan-y;
-  height: 36px !important;
-  border: none !important;
-  border-radius: 5px !important;
-  cursor: pointer;
-  transition: .25s;
-  background-color: var(--theme-color) !important;
-  color: #fff !important;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  outline: none;
-  font-size: 1.2em;
-  width: 90%;
-  box-shadow: none;
-  text-align: center;
-
 }
 
 .wv-top-button:hover {
@@ -417,10 +385,12 @@ form {
 
 #weather-view-he[data-v-db6ccf64]{
 
-  background-color: var(--back-color);
+  background-image: url()!important;
   padding: 40px;  
   box-shadow: 0px 0px 15px rgba(55, 84, 170, .15),
               0px 0px 20px rgba(255, 255, 255, 1),
               0px 0px 4px rgba(255, 255, 255, .2) !important;
   border-radius: 30px;
+  --bg-w-pure: rgb(30,30,30);
+  height: 285px!important;
 }
