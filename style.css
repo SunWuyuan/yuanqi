@@ -298,90 +298,202 @@ form {
 
 
 
+#he-plugin-simple {
+  
+  position: fixed;
+
+  transition: 0.25s;
+}
+#he-plugin-simple.shown {
+  opacity: 0.5;
+  pointer-events: unset;
+}
+#he-plugin-simple:hover {
+  opacity: 1 !important;
+}
+.s-sticker {
+  background-color: transparent !important;
+  cursor: default !important;
+}
+.s-sticker div {
+  color: #fff !important;
+}
+[data-v-db6ccf64][data-v-41ba7e2c] {
+  height: 290px !important;
+}
 #weather-view-he {
   height: 285px !important;
   padding: 10px !important;
   border-radius: 10px !important;
   background-color: var(--bg-w-pure) !important;
-  box-shadow: rgba(0, 0, 0, .1) 0 0 20px
-
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
 }
-
-
 .wv-lt-location,
 .wv-lt-refresh {
-  display: inline-block
+  display: inline-block;
 }
-
 .wv-lt-location a {
   padding: 0 5px;
   border-radius: 3px;
   color: var(--theme-color) !important;
   background-color: var(--theme-color-tint);
-  text-decoration: none !important
-  
+  text-decoration: none !important;
 }
-
 .wv-lt-col-5 {
-  text-align: right
+  text-align: right;
 }
-
 .wv-lt-refresh a {
-  font-size: 0 !important
+  font-size: 0 !important;
 }
-
 .wv-lt-refresh a::after {
-  content: "和风天气";
-  font-size: small !important
+  content: "\9752\67e0\548c\98ce";
+  font-size: small !important;
 }
-
 .vw-f-cell a,
 .wv-n-h-now-rain-text,
 .wv-n-h-now-tmp span,
 .wv-n-h-now-txt span,
 .wv-n-h-now-txt-t {
-  color: var(--txt-b-pure) !important
+  color: var(--txt-b-pure) !important;
 }
-
 .wv-f-table div .vw-f-cell:nth-child(1) a {
-  color: #9b9b9b !important
+  color: #9b9b9b !important;
 }
-
 .wv-top-backdrop {
   height: 285px !important;
-  padding-top: 50px !important
+  padding-top: 50px !important;
 }
-
 .wv-top-backdrop::after {
-  content: "请选择" !important;
-  padding-left: 5%
+  content: "\8BF7\4F7F\7528\952E\76D8\2191\2193\9009\62E9\FF0C\56DE\8F66\9009\5B9A" !important;
+  padding-left: 5%;
 }
-
 .wv-top-button,
 .wv-top-select {
   height: 36px !important;
   border: none !important;
   border-radius: 5px !important;
   cursor: pointer;
-  transition: .25s
+  transition: 0.25s;
 }
-
 .wv-top-select {
-  padding-left: 10px !important
+  padding-left: 10px !important;
 }
-
 .wv-top-button {
   background-color: var(--theme-color) !important;
-  color: #fff !important 
+  color: #fff !important;
 }
-
 .wv-top-button:hover {
-  background-color: var(--theme-color-hover) !important
+  background-color: var(--theme-color-hover) !important;
+}
+.wv-top-button:active {
+  background-color: var(--theme-color-active) !important;
 }
 
-.wv-top-button:active {
-  background-color: var(--theme-color-active) !important
+
+:root {
+  --theme-color: #70c000;
+  --theme-color-hover: #61a600;
+  --theme-color-active: #528c00;
+  --theme-color-tint: rgba(112, 192, 0, 0.1);
+  --selection-color: rgba(112, 192, 0, 0.35);
+  --theme-color-lime: #70c000;
+  --theme-color-hover-lime: #61a600;
+  --theme-color-active-lime: #528c00;
+  --theme-color-tint-lime: rgba(112, 192, 0, 0.1);
+  --selection-color-lime: rgba(112, 192, 0, 0.35);
+  --theme-color-indigo: #4cb6c2;
+  --theme-color-hover-indigo: #429ea8;
+  --theme-color-active-indigo: #337a82;
+  --theme-color-tint-indigo: rgba(76, 182, 194, 0.1);
+  --selection-color-indigo: rgba(76, 182, 194, 0.35);
+  --theme-color-violet: #bb8cdd;
+  --theme-color-hover-violet: #a67cc4;
+  --theme-color-active-violet: #86649e;
+  --theme-color-tint-violet: rgba(187, 140, 221, 0.1);
+  --selection-color-violet: rgba(187, 140, 221, 0.35);
+  --theme-color-rose: #ff4b68;
+  --theme-color-hover-rose: #e6435e;
+  --theme-color-active-rose: #bf374e;
+  --theme-color-tint-rose: rgba(255, 75, 104, 0.1);
+  --selection-color-rose: rgba(255, 75, 104, 0.35);
+  --theme-color-blue: #5ca1ff;
+  --theme-color-hover-blue: #5390e6;
+  --theme-color-active-blue: #4578bf;
+  --theme-color-tint-blue: rgba(92, 161, 255, 0.1);
+  --selection-color-blue: rgba(92, 161, 255, 0.35);
+  --w-alpha-5: rgba(255, 255, 255, 0.05);
+  --w-alpha-10: rgba(255, 255, 255, 0.1);
+  --w-alpha-15: rgba(255, 255, 255, 0.15);
+  --w-alpha-20: rgba(255, 255, 255, 0.2);
+  --w-alpha-30: rgba(255, 255, 255, 0.3);
+  --w-alpha-50: rgba(255, 255, 255, 0.5);
+  --w-alpha-60: rgba(255, 255, 255, 0.6);
+  --w-alpha-70: rgba(255, 255, 255, 0.7);
+  --w-alpha-80: rgba(255, 255, 255, 0.8);
+  --w-alpha-90: rgba(255, 255, 255, 0.9);
+  --bg-w-235: rgb(235, 235, 235);
+  --bg-w-s: rgb(245, 245, 245);
+  --bg-w-p: white;
+  --bg-w-pure: white;
+  --bg-w-hover: rgb(205, 205, 205);
+  --bg-w-active: rgb(175, 175, 175);
+  --txt-w-pure: white;
+  --txt-b-pure: black;
+  --txt-b-tip: rgba(0, 0, 0, 0.8);
+  --b-alpha-5: rgba(0, 0, 0, 0.05);
+  --b-alpha-10: rgba(0, 0, 0, 0.1);
+  --b-alpha-15: rgba(0, 0, 0, 0.15);
+  --b-alpha-20: rgba(0, 0, 0, 0.2);
+  --b-alpha-30: rgba(0, 0, 0, 0.3);
+  --b-alpha-35: rgba(0, 0, 0, 0.35);
+  --b-alpha-40: rgba(0, 0, 0, 0.4);
+  --b-alpha-50: rgba(0, 0, 0, 0.5);
+  --b-alpha-60: rgba(0, 0, 0, 0.6);
+  --b-alpha-70: rgba(0, 0, 0, 0.7);
+  --b-alpha-80: rgba(0, 0, 0, 0.8);
+  --b-alpha-90: rgba(0, 0, 0, 0.9);
+  --fonts-light: "Microsoft Yahei Light", "Microsoft Yahei", "PingFang SC",
+    "Helvetica Neue", Helvetica, Tahoma, Arial, sans-serif;
+  --fonts-regular: "Helvetica Neue", Helvetica, Tahoma, Arial, "PingFang SC",
+    "Microsoft Yahei", sans-serif;
+  --cubic-bezier: cubic-bezier(0.65, 0.05, 0.1, 1);
+  --body-top: 0px;
 }
+.dark {
+  --w-alpha-5: rgba(0, 0, 0, 0.05);
+  --w-alpha-10: rgba(0, 0, 0, 0.1);
+  --w-alpha-15: rgba(0, 0, 0, 0.15);
+  --w-alpha-20: rgba(0, 0, 0, 0.2);
+  --w-alpha-30: rgba(0, 0, 0, 0.3);
+  --w-alpha-50: rgba(30, 30, 30, 0.5);
+  --w-alpha-60: rgba(0, 0, 0, 0.6);
+  --w-alpha-70: rgba(30, 30, 30, 0.7);
+  --w-alpha-80: rgba(30, 30, 30, 0.8);
+  --w-alpha-90: rgba(30, 30, 30, 0.9);
+  --bg-w-235: rgb(30, 30, 30);
+  --bg-w-s: rgb(30, 30, 30);
+  --bg-w-p: rgb(40, 40, 40);
+  --bg-w-pure: rgb(30, 30, 30);
+  --bg-w-hover: rgb(40, 40, 40);
+  --bg-w-active: rgb(50, 50, 50);
+  --txt-w-pure: black;
+  --txt-b-pure: white;
+  --txt-b-tip: rgba(255, 255, 255, 0.5);
+  --b-alpha-5: rgba(255, 255, 255, 0.05);
+  --b-alpha-10: rgba(255, 255, 255, 0.1);
+  --b-alpha-15: rgba(255, 255, 255, 0.15);
+  --b-alpha-20: rgba(255, 255, 255, 0.2);
+  --b-alpha-30: rgba(255, 255, 255, 0.3);
+  --b-alpha-35: rgba(255, 255, 255, 0.35);
+  --b-alpha-40: rgba(255, 255, 255, 0.4);
+  --b-alpha-50: rgba(255, 255, 255, 0.5);
+  --b-alpha-60: rgba(255, 255, 255, 0.6);
+  --b-alpha-70: rgba(255, 255, 255, 0.7);
+  --b-alpha-80: rgba(255, 255, 255, 0.8);
+  --b-alpha-90: rgba(255, 255, 255, 0.9);
+  color-scheme: dark;
+}
+
 
 #weather-view-he[data-v-db6ccf64]{
 
@@ -391,6 +503,5 @@ form {
               0px 0px 20px rgba(255, 255, 255, 1),
               0px 0px 4px rgba(255, 255, 255, .2) !important;
   border-radius: 30px;
-  --bg-w-pure: rgb(30,30,30);
-  height: 285px!important;
+
 }
